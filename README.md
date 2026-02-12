@@ -1,4 +1,4 @@
-----------------------------------------------------------
+---
 
 Valentine's Day Coding Challenge
 
@@ -11,5 +11,4 @@ GitHub Repo: https://github.com/kvo110/vday
 
 - Assigned by Professor Louis Henry for Web Programming
 
-----------------------------------------------------------
-
+---
