@@ -984,15 +984,20 @@ code {
   margin-top: 1rem;
 }
 
+/* Center and lower the big heart inside the card */
 .heart-big {
   width: 70px;
   height: 70px;
-  margin-top: 0.75rem;
   position: relative;
   background: var(--valentine-red);
   transform: rotate(45deg);
   border-radius: 8px;
   filter: drop-shadow(0 10px 16px rgba(255, 77, 109, 0.25));
+
+  /* layout adjustments */
+  margin: 6rem auto 0;
+  /* push down + center horizontally */
+  display: block;
 }
 
 .heart-big::before,
