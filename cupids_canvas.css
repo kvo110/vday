@@ -653,9 +653,8 @@ code {
   0% {
     transform: translateX(0);
   }
-
   100% {
-    transform: translateX(calc(100vw + 1200px));
+    transform: translateX(160vw);
   }
 }
 
