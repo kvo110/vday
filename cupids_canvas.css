@@ -1,0 +1,1190 @@
+/* cupids-canvas.css
+  Cupid's Canvas storybook styles (single file by assignment rule).
+  Built mobile-first with CSS-only navigation and interactions.
+*/
+
+/* Valentine's Day Color Palette & Variables */
+:root {
+  --cupid-pink: #ffafcc;
+  --valentine-red: #ff4d6d;
+  --love-purple: #c77dff;
+  --chocolate: #7b3f00;
+  --vanilla: #fffaf0;
+
+  /* Spacing Variables */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 2rem;
+
+  /* A few extra helpers so styling stays consistent */
+  --ink: #1f1a1d;
+  --muted: rgba(31, 26, 29, 0.75);
+  --card: rgba(255, 250, 240, 0.82);
+  --shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  --radius: 18px;
+  --focus: 0 0 0 4px rgba(199, 125, 255, 0.45);
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition: none !important;
+  }
+}
+
+/* CSS-only page navigation with :target */
+.page {
+  display: none;
+}
+
+.page:target {
+  display: block;
+}
+
+/* Heart animation example */
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.heart {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+/* Fix: show something by default (otherwise blank load without #hash) */
+.page:first-of-type {
+  display: block;
+}
+
+/* Base page reset */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(1100px 500px at 20% 10%, rgba(255, 77, 109, 0.25), transparent 60%),
+    radial-gradient(900px 500px at 85% 15%, rgba(199, 125, 255, 0.22), transparent 60%),
+    linear-gradient(180deg, var(--vanilla), rgba(255, 175, 204, 0.2));
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.95em;
+}
+
+.wrap {
+  width: min(1100px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  background: var(--love-purple);
+  color: #fff;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  outline: none;
+  box-shadow: var(--focus);
+}
+
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 250, 240, 0.7);
+  border-bottom: 1px solid rgba(31, 26, 29, 0.08);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 0.9rem 0;
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.brand-mark {
+  font-size: 1.4rem;
+  color: var(--valentine-red);
+  animation: heartbeat 1.8s ease-in-out infinite;
+}
+
+.brand-title {
+  font-family: "Great Vibes", cursive;
+  font-size: 1.9rem;
+  letter-spacing: 0.5px;
+}
+
+.site-nav {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.nav-link {
+  position: relative;
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: rgba(255, 175, 204, 0.25);
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 8px;
+  height: 2px;
+  background: rgba(255, 77, 109, 0.55);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms ease;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  transform: translateY(-1px);
+  background: rgba(199, 125, 255, 0.22);
+  outline: none;
+}
+
+.nav-link:hover::after,
+.nav-link:focus::after {
+  transform: scaleX(1);
+}
+
+.main {
+  padding-bottom: 2rem;
+}
+
+/* Page layout */
+.page-inner {
+  padding: 1.5rem 0 2rem;
+}
+
+.hero {
+  padding: 1rem 0 1.25rem;
+}
+
+.kicker {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.hero-title {
+  margin: 0.35rem 0 0.2rem;
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  color: rgba(31, 26, 29, 0.95);
+  animation: titleFloat 4.6s ease-in-out infinite;
+}
+
+@keyframes titleFloat {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.hero-subtitle {
+  margin: 0;
+  color: var(--muted);
+  max-width: 60ch;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.05rem;
+  border-radius: 999px;
+  font-weight: 600;
+  border: 1px solid rgba(31, 26, 29, 0.12);
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: var(--focus);
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, var(--valentine-red), var(--love-purple));
+  color: #fff;
+  border-color: transparent;
+}
+
+.btn.ghost {
+  background: rgba(255, 250, 240, 0.65);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Cards */
+.cards {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.1rem;
+}
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(31, 26, 29, 0.08);
+  padding: 1rem;
+  transition: transform 180ms ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.card-title {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
+}
+
+.card-text {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.card.fancy {
+  position: relative;
+  overflow: hidden;
+}
+
+.card.fancy::before {
+  content: "";
+  position: absolute;
+  inset: -60px -60px auto auto;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 77, 109, 0.35), transparent 60%);
+  transform: rotate(18deg);
+}
+
+/* Page footer */
+.page-footer {
+  margin-top: 1.25rem;
+  padding: 1rem 0 0.25rem;
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.credit {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.romance {
+  margin: 0;
+  font-style: italic;
+  color: rgba(31, 26, 29, 0.78);
+}
+
+.site-footer {
+  padding: 1.5rem 0 2rem;
+}
+
+/* ---------------------------
+  Option 5 Scene: Carriage Ride
+---------------------------- */
+.scene {
+  position: relative;
+  height: 280px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid rgba(31, 26, 29, 0.08);
+  box-shadow: var(--shadow);
+  background:
+    radial-gradient(500px 240px at 70% 25%, rgba(199, 125, 255, 0.28), transparent 60%),
+    linear-gradient(180deg, rgba(255, 175, 204, 0.55), rgba(255, 250, 240, 0.9));
+}
+
+.sky {
+  position: absolute;
+  inset: 0;
+}
+
+.cloud {
+  position: absolute;
+  top: 18px;
+  width: 120px;
+  height: 40px;
+  border-radius: 999px;
+  background: rgba(255, 250, 240, 0.85);
+  filter: blur(0.2px);
+  animation: cloudDrift 18s linear infinite;
+}
+
+.cloud::before,
+.cloud::after {
+  content: "";
+  position: absolute;
+  background: rgba(255, 250, 240, 0.85);
+  border-radius: 999px;
+}
+
+.cloud::before {
+  width: 54px;
+  height: 34px;
+  left: 12px;
+  top: -14px;
+}
+
+.cloud::after {
+  width: 64px;
+  height: 38px;
+  left: 44px;
+  top: -18px;
+}
+
+.c1 {
+  left: -140px;
+  top: 22px;
+  animation-duration: 20s;
+}
+
+.c2 {
+  left: -220px;
+  top: 58px;
+  opacity: 0.8;
+  animation-duration: 26s;
+}
+
+.c3 {
+  left: -180px;
+  top: 96px;
+  opacity: 0.7;
+  animation-duration: 30s;
+}
+
+@keyframes cloudDrift {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(100vw + 420px));
+  }
+}
+
+.horizon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 68px;
+  height: 120px;
+}
+
+.tree {
+  position: absolute;
+  bottom: 0;
+  width: 34px;
+  height: 96px;
+  transform-origin: bottom center;
+  animation: treeSway 4.2s ease-in-out infinite;
+}
+
+.tree::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 10px;
+  height: 44px;
+  transform: translateX(-50%);
+  border-radius: 8px;
+  background: rgba(123, 63, 0, 0.85);
+}
+
+.tree::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 32px;
+  width: 44px;
+  height: 44px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 77, 109, 0.18), rgba(199, 125, 255, 0.18));
+  box-shadow: 0 0 0 8px rgba(255, 175, 204, 0.18);
+}
+
+.t1 {
+  left: 8%;
+  height: 92px;
+  animation-delay: 0.1s;
+}
+
+.t2 {
+  left: 24%;
+  height: 104px;
+  animation-delay: 0.3s;
+}
+
+.t3 {
+  left: 68%;
+  height: 94px;
+  animation-delay: 0.2s;
+}
+
+.t4 {
+  left: 86%;
+  height: 110px;
+  animation-delay: 0.4s;
+}
+
+@keyframes treeSway {
+  0% {
+    transform: rotate(-1.2deg);
+  }
+
+  50% {
+    transform: rotate(1.2deg);
+  }
+
+  100% {
+    transform: rotate(-1.2deg);
+  }
+}
+
+.birds {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bird {
+  position: absolute;
+  top: 120px;
+  width: 18px;
+  height: 10px;
+  border: 2px solid rgba(31, 26, 29, 0.35);
+  border-color: rgba(31, 26, 29, 0.35) transparent transparent transparent;
+  border-radius: 50%;
+  transform: rotate(10deg);
+  animation: birdFly 10s linear infinite;
+}
+
+.bird::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 0;
+  width: 18px;
+  height: 10px;
+  border: 2px solid rgba(31, 26, 29, 0.35);
+  border-color: rgba(31, 26, 29, 0.35) transparent transparent transparent;
+  border-radius: 50%;
+  transform: rotate(-20deg);
+}
+
+.b1 {
+  left: -80px;
+  top: 118px;
+  animation-duration: 11s;
+  opacity: 0.7;
+}
+
+.b2 {
+  left: -140px;
+  top: 150px;
+  animation-duration: 14s;
+  opacity: 0.55;
+}
+
+@keyframes birdFly {
+  0% {
+    transform: translateX(0) translateY(0) scale(0.9);
+  }
+
+  50% {
+    transform: translateX(calc(50vw + 100px)) translateY(-18px) scale(0.95);
+  }
+
+  100% {
+    transform: translateX(calc(100vw + 220px)) translateY(6px) scale(0.9);
+  }
+}
+
+.ground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 70px;
+  background: linear-gradient(180deg, rgba(123, 63, 0, 0.06), rgba(123, 63, 0, 0.14));
+}
+
+/* Moving carriage group */
+.carriage-wrap {
+  position: absolute;
+  left: -420px;
+  bottom: 34px;
+  width: 420px;
+  height: 160px;
+  animation: rideAcross 10s linear infinite;
+  transform-origin: center;
+}
+
+.scene:hover .carriage-wrap {
+  animation-duration: 7.5s;
+}
+
+@keyframes rideAcross {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(100vw + 840px));
+  }
+}
+
+/* Hearts trail */
+.heart-trail {
+  position: absolute;
+  left: 120px;
+  bottom: 84px;
+  width: 160px;
+  height: 90px;
+  pointer-events: none;
+}
+
+.trail-heart {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: var(--valentine-red);
+  transform: rotate(45deg);
+  opacity: 0.75;
+  border-radius: 2px;
+  animation: trailFloat 1.8s ease-in-out infinite;
+}
+
+.trail-heart::before,
+.trail-heart::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: var(--valentine-red);
+  border-radius: 50%;
+}
+
+.trail-heart::before {
+  left: -7px;
+  top: 0;
+}
+
+.trail-heart::after {
+  left: 0;
+  top: -7px;
+}
+
+.h1 {
+  left: 10px;
+  bottom: 8px;
+  animation-delay: 0.0s;
+}
+
+.h2 {
+  left: 38px;
+  bottom: 24px;
+  transform: rotate(45deg) scale(0.9);
+  animation-delay: 0.3s;
+  opacity: 0.65;
+}
+
+.h3 {
+  left: 68px;
+  bottom: 10px;
+  transform: rotate(45deg) scale(0.8);
+  animation-delay: 0.6s;
+  opacity: 0.55;
+}
+
+.h4 {
+  left: 96px;
+  bottom: 26px;
+  transform: rotate(45deg) scale(0.75);
+  animation-delay: 0.9s;
+  opacity: 0.5;
+}
+
+@keyframes trailFloat {
+  0% {
+    transform: translateY(0) rotate(45deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(45deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(45deg);
+  }
+}
+
+/* Horse */
+.horse {
+  position: absolute;
+  left: 0;
+  bottom: 32px;
+  width: 160px;
+  height: 90px;
+  animation: horseBob 0.6s ease-in-out infinite;
+}
+
+@keyframes horseBob {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(2px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.horse-body {
+  position: absolute;
+  left: 26px;
+  bottom: 18px;
+  width: 98px;
+  height: 44px;
+  border-radius: 20px;
+  background: rgba(123, 63, 0, 0.82);
+}
+
+.horse-head {
+  position: absolute;
+  left: 4px;
+  bottom: 38px;
+  width: 44px;
+  height: 34px;
+  border-radius: 16px;
+  background: rgba(123, 63, 0, 0.82);
+  transform: rotate(-10deg);
+}
+
+.horse-leg {
+  position: absolute;
+  bottom: 0;
+  width: 12px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(123, 63, 0, 0.86);
+  transform-origin: top center;
+  animation: legStep 0.6s ease-in-out infinite;
+}
+
+.l1 {
+  left: 44px;
+  animation-delay: 0.0s;
+}
+
+.l2 {
+  left: 66px;
+  animation-delay: 0.3s;
+}
+
+.l3 {
+  left: 90px;
+  animation-delay: 0.0s;
+}
+
+.l4 {
+  left: 112px;
+  animation-delay: 0.3s;
+}
+
+@keyframes legStep {
+  0% {
+    transform: rotate(16deg);
+  }
+
+  50% {
+    transform: rotate(-16deg);
+  }
+
+  100% {
+    transform: rotate(16deg);
+  }
+}
+
+/* Carriage */
+.carriage {
+  position: absolute;
+  left: 150px;
+  bottom: 18px;
+  width: 240px;
+  height: 110px;
+  animation: carriageBob 0.6s ease-in-out infinite;
+}
+
+@keyframes carriageBob {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(1.5px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.carriage-body {
+  position: absolute;
+  left: 0;
+  bottom: 22px;
+  width: 200px;
+  height: 64px;
+  border-radius: 18px;
+  background: rgba(255, 175, 204, 0.55);
+  border: 2px solid rgba(255, 77, 109, 0.5);
+}
+
+.carriage-roof {
+  position: absolute;
+  left: 26px;
+  bottom: 76px;
+  width: 150px;
+  height: 34px;
+  border-radius: 18px;
+  background: rgba(199, 125, 255, 0.35);
+  border: 2px solid rgba(199, 125, 255, 0.5);
+}
+
+.window {
+  position: absolute;
+  left: 52px;
+  bottom: 38px;
+  width: 96px;
+  height: 40px;
+  border-radius: 12px;
+  border: 2px solid rgba(31, 26, 29, 0.12);
+  background: rgba(255, 250, 240, 0.7);
+  overflow: hidden;
+}
+
+.person {
+  position: absolute;
+  bottom: 2px;
+  width: 20px;
+  height: 26px;
+  border-radius: 12px 12px 8px 8px;
+  background: rgba(31, 26, 29, 0.78);
+}
+
+.p1 {
+  left: 16px;
+  animation: wave 1.2s ease-in-out infinite;
+  transform-origin: 70% 20%;
+}
+
+.p2 {
+  left: 54px;
+  animation: wave 1.2s ease-in-out infinite;
+  animation-delay: 0.2s;
+  transform-origin: 70% 20%;
+  opacity: 0.85;
+}
+
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(10deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* Wheels */
+.wheel {
+  position: absolute;
+  bottom: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 3px solid rgba(31, 26, 29, 0.5);
+  background: rgba(255, 250, 240, 0.55);
+  animation: spin 0.8s linear infinite;
+}
+
+.wheel::after {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border-radius: 50%;
+  border: 2px dashed rgba(31, 26, 29, 0.35);
+}
+
+.w1 {
+  left: 22px;
+}
+
+.w2 {
+  left: 132px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Reins line connecting horse to carriage */
+.reins {
+  position: absolute;
+  left: 120px;
+  bottom: 92px;
+  width: 48px;
+  height: 2px;
+  background: rgba(31, 26, 29, 0.35);
+  transform: rotate(-8deg);
+}
+
+/* ---------------------------
+  Page 2: Garden interactions
+---------------------------- */
+.garden-grid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.heart-big {
+  width: 70px;
+  height: 70px;
+  margin-top: 0.75rem;
+  position: relative;
+  background: var(--valentine-red);
+  transform: rotate(45deg);
+  border-radius: 8px;
+  filter: drop-shadow(0 10px 16px rgba(255, 77, 109, 0.25));
+}
+
+.heart-big::before,
+.heart-big::after {
+  content: "";
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  background: var(--valentine-red);
+  border-radius: 50%;
+}
+
+.heart-big::before {
+  left: -35px;
+  top: 0;
+}
+
+.heart-big::after {
+  left: 0;
+  top: -35px;
+}
+
+.card.fancy:hover .heart-big,
+.card.fancy:focus-within .heart-big {
+  animation-duration: 0.9s;
+}
+
+/* Love letter toggle using :checked */
+.letter {
+  margin-top: 0.75rem;
+}
+
+.letter-toggle {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.letter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  background: rgba(255, 175, 204, 0.35);
+  border: 1px solid rgba(31, 26, 29, 0.12);
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.letter-btn:hover,
+.letter-btn:focus {
+  transform: translateY(-1px);
+  background: rgba(199, 125, 255, 0.22);
+  outline: none;
+  box-shadow: var(--focus);
+}
+
+.envelope {
+  position: relative;
+  margin-top: 0.8rem;
+  width: min(360px, 100%);
+  height: 150px;
+  border-radius: 16px;
+  background: rgba(255, 250, 240, 0.85);
+  border: 1px solid rgba(31, 26, 29, 0.12);
+  overflow: hidden;
+}
+
+.flap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -20px;
+  height: 90px;
+  background: rgba(255, 175, 204, 0.55);
+  transform: rotate(0deg);
+  transform-origin: top center;
+  clip-path: polygon(0 0, 100% 0, 50% 70%);
+  transition: transform 220ms ease;
+}
+
+.paper {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 10px;
+  height: 110px;
+  border-radius: 12px;
+  background: rgba(255, 250, 240, 0.96);
+  border: 1px solid rgba(31, 26, 29, 0.08);
+  transform: translateY(58px);
+  transition: transform 260ms ease;
+  padding: 0.75rem;
+}
+
+.paper-text {
+  margin: 0;
+  color: rgba(31, 26, 29, 0.75);
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+/* The actual state change */
+.letter-toggle:checked+.letter-btn+.envelope .flap {
+  transform: rotateX(180deg);
+}
+
+.letter-toggle:checked+.letter-btn+.envelope .paper {
+  transform: translateY(0);
+}
+
+/* Arrow animation */
+.arrow {
+  position: relative;
+  margin-top: 1rem;
+  width: 160px;
+  height: 10px;
+  background: rgba(31, 26, 29, 0.45);
+  border-radius: 999px;
+  overflow: visible;
+  transform: translateX(-8px);
+  transition: transform 250ms ease;
+}
+
+.arrow::before {
+  content: "";
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  width: 0;
+  height: 0;
+  border-left: 18px solid rgba(31, 26, 29, 0.45);
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+}
+
+.arrow::after {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: -8px;
+  width: 18px;
+  height: 18px;
+  background: var(--valentine-red);
+  transform: rotate(45deg);
+  border-radius: 3px;
+}
+
+.card.fancy:hover .arrow,
+.card.fancy:focus-within .arrow {
+  transform: translateX(60px);
+}
+
+/* ---------------------------
+  Page 3: Rings (pseudo-elements)
+---------------------------- */
+.closing {
+  margin-top: 1rem;
+}
+
+.ring-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.ring-card::before {
+  content: "";
+  position: absolute;
+  inset: -60px -60px auto auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(255, 77, 109, 0.22), transparent 60%);
+}
+
+.rings {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  align-items: center;
+}
+
+.ring {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 6px solid rgba(123, 63, 0, 0.7);
+  position: relative;
+  animation: ringGlow 2.6s ease-in-out infinite;
+}
+
+.r1 {
+  transform: translateX(12px);
+}
+
+.r2 {
+  border-color: rgba(199, 125, 255, 0.55);
+}
+
+@keyframes ringGlow {
+  0% {
+    box-shadow: 0 0 0 rgba(255, 77, 109, 0.0);
+  }
+
+  50% {
+    box-shadow: 0 0 22px rgba(255, 77, 109, 0.22);
+  }
+
+  100% {
+    box-shadow: 0 0 0 rgba(255, 77, 109, 0.0);
+  }
+}
+
+/* ---------------------------
+  Responsive tweaks
+---------------------------- */
+@media (min-width: 720px) {
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .garden-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: stretch;
+  }
+
+  .scene {
+    height: 320px;
+  }
+}

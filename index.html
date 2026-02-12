@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!--
+  index.html
+  Cupid's Canvas: A Storybook Coding Challenge
+  CSS-only multi-page storybook using :target navigation (no JavaScript).
+-->
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cupid's Canvas</title>
+
+  <!-- Romantic display + readable body font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="cupids-canvas.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="brand" aria-label="Cupid's Canvas logo">
+        <span class="brand-mark" aria-hidden="true">♥</span>
+        <span class="brand-title">Cupid's Canvas</span>
+      </div>
+
+      <nav class="site-nav" aria-label="Storybook navigation">
+        <a class="nav-link" href="#beginning">Love's Beginning</a>
+        <a class="nav-link" href="#garden">Cupid's Garden</a>
+        <a class="nav-link" href="#eternal">Eternal Romance</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="main">
+    <!-- Page 1 -->
+    <section class="page" id="beginning" aria-labelledby="beginning-title">
+      <div class="wrap page-inner">
+        <header class="hero">
+          <p class="kicker">Chapter 1</p>
+          <h1 id="beginning-title" class="hero-title">
+            Love’s Beginning
+          </h1>
+          <p class="hero-subtitle">
+            A quiet ride, a gentle breeze, and a trail of hearts behind us.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#garden">Turn the page</a>
+            <a class="btn ghost" href="#eternal">Skip to ending</a>
+          </div>
+        </header>
+
+        <!-- Option 5: Romantic Carriage Ride (CSS-built shapes) -->
+        <section class="scene" aria-label="Romantic carriage ride scene">
+          <div class="sky">
+            <span class="cloud c1" aria-hidden="true"></span>
+            <span class="cloud c2" aria-hidden="true"></span>
+            <span class="cloud c3" aria-hidden="true"></span>
+          </div>
+
+          <div class="horizon" aria-hidden="true">
+            <span class="tree t1"></span>
+            <span class="tree t2"></span>
+            <span class="tree t3"></span>
+            <span class="tree t4"></span>
+          </div>
+
+          <div class="birds" aria-hidden="true">
+            <span class="bird b1"></span>
+            <span class="bird b2"></span>
+          </div>
+
+          <!-- The whole carriage group moves across the screen in a loop -->
+          <div class="carriage-wrap" aria-hidden="true">
+            <div class="heart-trail">
+              <span class="trail-heart h1"></span>
+              <span class="trail-heart h2"></span>
+              <span class="trail-heart h3"></span>
+              <span class="trail-heart h4"></span>
+            </div>
+
+            <div class="horse">
+              <span class="horse-body"></span>
+              <span class="horse-head"></span>
+              <span class="horse-leg l1"></span>
+              <span class="horse-leg l2"></span>
+              <span class="horse-leg l3"></span>
+              <span class="horse-leg l4"></span>
+            </div>
+
+            <div class="carriage">
+              <span class="carriage-body"></span>
+              <span class="carriage-roof"></span>
+              <span class="wheel w1"></span>
+              <span class="wheel w2"></span>
+
+              <div class="window">
+                <span class="person p1" title="Person waving"></span>
+                <span class="person p2" title="Person waving"></span>
+              </div>
+            </div>
+
+            <span class="reins"></span>
+          </div>
+
+          <div class="ground" aria-hidden="true"></div>
+        </section>
+
+        <section class="cards" aria-label="Story details">
+          <article class="card">
+            <h2 class="card-title">A moving moment</h2>
+            <p class="card-text">
+              The carriage rolls forward while the horse keeps a steady trot.
+              Even the clouds can’t help but drift along.
+            </p>
+          </article>
+
+          <article class="card">
+            <h2 class="card-title">Little signs of love</h2>
+            <p class="card-text">
+              Hearts float in the carriage trail like a secret message only we can read.
+              (Hover the scene for a tiny surprise.)
+            </p>
+          </article>
+        </section>
+      </div>
+
+      <footer class="page-footer">
+        <div class="wrap footer-inner">
+          <p class="credit">Made with HTML + CSS only.</p>
+          <p class="romance">“Some stories start with a simple ride.”</p>
+        </div>
+      </footer>
+    </section>
+
+    <!-- Page 2 -->
+    <section class="page" id="garden" aria-labelledby="garden-title">
+      <div class="wrap page-inner">
+        <header class="hero">
+          <p class="kicker">Chapter 2</p>
+          <h1 id="garden-title" class="hero-title">Cupid’s Garden</h1>
+          <p class="hero-subtitle">
+            A place where love notes bloom and hearts respond to your touch.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn ghost" href="#beginning">Back</a>
+            <a class="btn primary" href="#eternal">Turn the page</a>
+          </div>
+        </header>
+
+        <section class="garden-grid" aria-label="Interactive garden">
+          <article class="card fancy">
+            <h2 class="card-title">Beating heart</h2>
+            <p class="card-text">Hover or focus the heart to see it “wake up.”</p>
+            <div class="heart heart-big" aria-hidden="true"></div>
+          </article>
+
+          <article class="card fancy">
+            <h2 class="card-title">Open the love letter</h2>
+            <p class="card-text">This uses <code>:checked</code> for a real state change.</p>
+
+            <div class="letter">
+              <input class="letter-toggle" type="checkbox" id="open-letter" />
+              <label class="letter-btn" for="open-letter">Open / Close</label>
+
+              <div class="envelope" aria-hidden="true">
+                <div class="flap"></div>
+                <div class="paper">
+                  <p class="paper-text">
+                    Roses are red, violets are blue…<br />
+                    This page flips with CSS,<br />
+                    and so can you.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card fancy">
+            <h2 class="card-title">Cupid’s arrow</h2>
+            <p class="card-text">Hover to send the arrow flying across the card.</p>
+            <div class="arrow" aria-hidden="true"></div>
+          </article>
+        </section>
+      </div>
+
+      <footer class="page-footer">
+        <div class="wrap footer-inner">
+          <p class="credit">Accessibility tip: try tabbing through buttons and labels.</p>
+          <p class="romance">“Love grows where you give it attention.”</p>
+        </div>
+      </footer>
+    </section>
+
+    <!-- Page 3 -->
+    <section class="page" id="eternal" aria-labelledby="eternal-title">
+      <div class="wrap page-inner">
+        <header class="hero">
+          <p class="kicker">Chapter 3</p>
+          <h1 id="eternal-title" class="hero-title">Eternal Romance</h1>
+          <p class="hero-subtitle">
+            A soft ending, a bright promise, and a story that keeps looping.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn ghost" href="#garden">Back</a>
+            <a class="btn primary" href="#beginning">Restart story</a>
+          </div>
+        </header>
+
+        <section class="closing" aria-label="Final message">
+          <div class="ring-card card">
+            <h2 class="card-title">Always</h2>
+            <p class="card-text">
+              Not every love story needs a big plot twist.
+              Sometimes it’s just two people choosing each other, again and again.
+            </p>
+
+            <div class="rings" aria-hidden="true">
+              <span class="ring r1"></span>
+              <span class="ring r2"></span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer class="page-footer">
+        <div class="wrap footer-inner">
+          <p class="credit">Team project: commits should show both partners.</p>
+          <p class="romance">“The best endings are the ones you can revisit.”</p>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="credit">Cupid’s Canvas • HTML + CSS only • Valentine’s Day Storybook</p>
+    </div>
+  </footer>
+</body>
+
+</html>
