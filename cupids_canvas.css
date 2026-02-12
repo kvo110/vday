@@ -1,4 +1,5 @@
-/* cupids-canvas.css
+
+/* cupids_canvas.css
   Cupid's Canvas storybook styles (single file by assignment rule).
   Built mobile-first with CSS-only navigation and interactions.
 */
@@ -17,7 +18,7 @@
   --space-3: 1rem;
   --space-4: 2rem;
 
-  /* A few extra helpers so styling stays consistent */
+  /* Extra helpers so the design stays consistent */
   --ink: #1f1a1d;
   --muted: rgba(31, 26, 29, 0.75);
   --card: rgba(255, 250, 240, 0.82);
@@ -44,6 +45,14 @@
   display: block;
 }
 
+/* Default page behavior:
+  - If the URL has no #hash, show Chapter 1
+  - If a page IS targeted, only show that one page
+*/
+.main:not(:has(.page:target)) #beginning {
+  display: block;
+}
+
 /* Heart animation example */
 @keyframes heartbeat {
   0% {
@@ -61,11 +70,6 @@
 
 .heart {
   animation: heartbeat 1.5s ease-in-out infinite;
-}
-
-/* Fix: show something by default (otherwise blank load without #hash) */
-.page:first-of-type {
-  display: block;
 }
 
 /* Base page reset */
@@ -206,6 +210,45 @@ code {
 /* Page layout */
 .page-inner {
   padding: 1.5rem 0 2rem;
+}
+
+/* Splash page tweaks (page 1) */
+.splash {
+  padding: 0;
+}
+
+/* This makes the scene act like a cover/splash screen */
+.scene-full {
+  height: calc(100vh - 84px);
+  min-height: 520px;
+}
+
+/* Title overlay on the splash */
+.scene-overlay {
+  position: absolute;
+  top: 1.25rem;
+  left: 1rem;
+  right: 1rem;
+  text-align: center;
+  z-index: 6;
+  pointer-events: none;
+}
+
+/* Buttons pinned to the bottom-center of the splash */
+.splash-actions {
+  position: absolute;
+  left: 50%;
+  bottom: 1.25rem;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  z-index: 7;
+}
+
+.splash-actions .btn {
+  min-width: 160px;
 }
 
 .hero {
@@ -363,9 +406,7 @@ code {
   padding: 1.5rem 0 2rem;
 }
 
-/* ---------------------------
-  Option 5 Scene: Carriage Ride
----------------------------- */
+/* Option 5 Scene: Carriage Ride */
 .scene {
   position: relative;
   height: 280px;
@@ -594,7 +635,7 @@ code {
   background: linear-gradient(180deg, rgba(123, 63, 0, 0.06), rgba(123, 63, 0, 0.14));
 }
 
-/* Moving carriage group */
+/* Moving carriage group (loops across forever) */
 .carriage-wrap {
   position: absolute;
   left: -600px;
@@ -618,7 +659,7 @@ code {
   }
 }
 
-/* Hearts trail */
+/* Hearts trail behind the carriage */
 .heart-trail {
   position: absolute;
   right: 360px;
@@ -740,14 +781,12 @@ code {
 .horse-head {
   position: absolute;
   right: 4px;
-  /* move to right side */
   bottom: 38px;
   width: 44px;
   height: 34px;
   border-radius: 16px;
   background: rgba(123, 63, 0, 0.82);
   transform: rotate(10deg);
-  /* slight forward tilt */
 }
 
 .horse-leg {
@@ -795,11 +834,10 @@ code {
   }
 }
 
-/* Carriage */
+/* Carriage (sits behind the horse) */
 .carriage {
   position: absolute;
   right: 180px;
-  /* place carriage behind horse */
   bottom: 18px;
   width: 240px;
   height: 110px;
@@ -929,7 +967,7 @@ code {
   }
 }
 
-/* Reins line connecting horse to carriage */
+/* Reins line connecting carriage to horse */
 .reins {
   position: absolute;
   right: 130px;
@@ -940,9 +978,7 @@ code {
   transform: rotate(6deg);
 }
 
-/* ---------------------------
-  Page 2: Garden interactions
----------------------------- */
+/* Page 2: Garden interactions */
 .garden-grid {
   display: grid;
   gap: 1rem;
@@ -990,6 +1026,7 @@ code {
   margin-top: 0.75rem;
 }
 
+/* Hiding the checkbox but still keeping it accessible */
 .letter-toggle {
   position: absolute;
   opacity: 0;
@@ -1113,9 +1150,7 @@ code {
   transform: translateX(60px);
 }
 
-/* ---------------------------
-  Page 3: Rings (pseudo-elements)
----------------------------- */
+/* Page 3: Rings */
 .closing {
   margin-top: 1rem;
 }
@@ -1173,9 +1208,7 @@ code {
   }
 }
 
-/* ---------------------------
-  Responsive tweaks
----------------------------- */
+/* Responsive tweaks */
 @media (min-width: 720px) {
   .cards {
     grid-template-columns: 1fr 1fr;

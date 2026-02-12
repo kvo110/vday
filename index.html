@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <!--
   index.html
-  Cupid's Canvas: A Storybook Coding Challenge!
-  CSS-only multi-page storybook using :target navigation (no JavaScript).
+  Cupid's Canvas: A Storybook Coding Challenge
+  Notes:
+  - CSS-only navigation using :target (no JavaScript)
+  - 3 pages: beginning, garden, eternal
 -->
 <html lang="en">
 
@@ -17,10 +19,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap"
     rel="stylesheet" />
 
+  <!-- Keep this filename exactly how it is in your project folder -->
   <link rel="stylesheet" href="cupids_canvas.css" />
 </head>
 
 <body>
+  <!-- Skip link for keyboard users -->
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
@@ -39,26 +43,20 @@
   </header>
 
   <main id="main" class="main">
-    <!-- Page 1 -->
+    <!-- Page 1 (Splash): full-screen animated scene -->
     <section class="page" id="beginning" aria-labelledby="beginning-title">
-      <div class="wrap page-inner">
-        <header class="hero">
-          <p class="kicker">Chapter 1</p>
-          <h1 id="beginning-title" class="hero-title">
-            Love’s Beginning
-          </h1>
-          <p class="hero-subtitle">
-            A quiet ride, a gentle breeze, and a trail of hearts behind us.
-          </p>
-
-          <div class="hero-actions">
-            <a class="btn primary" href="#garden">Turn the page</a>
-            <a class="btn ghost" href="#eternal">Skip to ending</a>
-          </div>
-        </header>
-
+      <div class="wrap page-inner splash">
         <!-- Option 5: Romantic Carriage Ride (CSS-built shapes) -->
-        <section class="scene" aria-label="Romantic carriage ride scene">
+        <section class="scene scene-full" aria-label="Romantic carriage ride splash scene">
+          <!-- Title sits on top of the animation like a storybook cover -->
+          <div class="scene-overlay">
+            <p class="kicker">Chapter 1</p>
+            <h1 id="beginning-title" class="hero-title">Love’s Beginning</h1>
+            <p class="hero-subtitle">
+              A quiet ride, a gentle breeze, and a trail of hearts behind us.
+            </p>
+          </div>
+
           <div class="sky">
             <span class="cloud c1" aria-hidden="true"></span>
             <span class="cloud c2" aria-hidden="true"></span>
@@ -111,24 +109,12 @@
           </div>
 
           <div class="ground" aria-hidden="true"></div>
-        </section>
 
-        <section class="cards" aria-label="Story details">
-          <article class="card">
-            <h2 class="card-title">A moving moment</h2>
-            <p class="card-text">
-              The carriage rolls forward while the horse keeps a steady trot.
-              Even the clouds can’t help but drift along.
-            </p>
-          </article>
-
-          <article class="card">
-            <h2 class="card-title">Little signs of love</h2>
-            <p class="card-text">
-              Hearts float in the carriage trail like a secret message only we can read.
-              (Hover the scene for a tiny surprise.)
-            </p>
-          </article>
+          <!-- Buttons pinned bottom-center on the splash -->
+          <div class="splash-actions" aria-label="Page navigation">
+            <a class="btn ghost" href="#garden">Next page</a>
+            <a class="btn primary" href="#eternal">Skip to ending</a>
+          </div>
         </section>
       </div>
 
