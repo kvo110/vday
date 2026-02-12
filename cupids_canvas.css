@@ -1133,46 +1133,61 @@ code {
   opacity: 1;
 }
 
-/* Arrow animation */
 .arrow {
   position: relative;
-  margin-top: 1rem;
-  width: 160px;
-  height: 10px;
-  background: rgba(31, 26, 29, 0.45);
+  margin-top: 6rem;
+
+  /* shorter shaft */
+  width: 130px;
+  height: 8px;
   border-radius: 999px;
-  overflow: visible;
-  transform: translateX(-8px);
-  transition: transform 250ms ease;
+  background: rgba(31, 26, 29, 0.45);
+
+  /* start a little left so it has room to fly */
+  transform: translateX(-14px);
+  transition: transform 420ms ease, rotate 420ms ease;
 }
 
+/* triangle tip (front) */
 .arrow::before {
   content: "";
   position: absolute;
-  right: -8px;
-  top: -8px;
+  right: -14px;
+  top: 50%;
+  transform: translateY(-50%);
   width: 0;
   height: 0;
-  border-left: 18px solid rgba(31, 26, 29, 0.45);
-  border-top: 12px solid transparent;
-  border-bottom: 12px solid transparent;
+
+  border-left: 16px solid rgba(31, 26, 29, 0.45);
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
 }
 
+/* rounded heart charm (back) */
 .arrow::after {
   content: "";
   position: absolute;
-  left: -10px;
-  top: -8px;
+  left: -14px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-45deg);
+
   width: 18px;
   height: 18px;
   background: var(--valentine-red);
-  transform: rotate(45deg);
-  border-radius: 3px;
+  border-radius: 6px;
+
+  /* heart lobes */
+  box-shadow:
+    -9px 0 0 0 var(--valentine-red),
+    0 -9px 0 0 var(--valentine-red);
+
+  filter: drop-shadow(0 4px 8px rgba(255, 77, 109, 0.22));
 }
 
+/* Fly almost the full card width (responsive) */
 .card.fancy:hover .arrow,
 .card.fancy:focus-within .arrow {
-  transform: translateX(60px);
+  transform: translateX(calc(100% + 90px));
 }
 
 /* Page 3: Rings */
@@ -1195,28 +1210,45 @@ code {
   background: radial-gradient(circle at 35% 35%, rgba(255, 77, 109, 0.22), transparent 60%);
 }
 
+/* Rings layout */
 .rings {
-  display: flex;
-  gap: 0.5rem;
+  position: relative;
   margin-top: 1rem;
-  align-items: center;
+  height: 80px;
 }
 
+/* Base ring styling */
 .ring {
   width: 60px;
   height: 60px;
   border-radius: 50%;
   border: 6px solid rgba(123, 63, 0, 0.7);
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  /* Start separated using transform only (smoother animation) */
+  transform: translate(-180%, -50%);
+  transition: transform 600ms cubic-bezier(.65, .05, .36, 1);
+
   animation: ringGlow 2.6s ease-in-out infinite;
 }
 
-.r1 {
-  transform: translateX(12px);
-}
-
+/* Right ring starts mirrored */
 .r2 {
   border-color: rgba(199, 125, 255, 0.55);
+  transform: translate(80%, -50%);
+}
+
+/* On hover: both rings move toward center simultaneously */
+.ring-card:hover .r1,
+.ring-card:focus-within .r1 {
+  transform: translate(-78%, -50%);
+}
+
+.ring-card:hover .r2,
+.ring-card:focus-within .r2 {
+  transform: translate(-22%, -50%);
 }
 
 @keyframes ringGlow {
